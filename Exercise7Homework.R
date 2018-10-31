@@ -14,6 +14,17 @@ oddsonly <- function(data){
 }
 ####I really have not been able to figure this one out ^^
 
+# Brittni: You set up the function correctly, but you needed to get sequences of odd numbers and the subset (-0.75).
+# Here is the answer:
+odds=function(data){
+  oddSeq=seq(from=1, to=nrow(data), by=2)
+  oddDF=data[oddSeq,]
+  return(oddDF)
+}
+odds(iris)
+
+
+
 ##PROBLEM 2
 #Repeat a subset of last week's exercise, but write functions to accomplish these tasks.
 ###Return the number of observations for a given species included in the data set
@@ -26,24 +37,33 @@ speciescount <- function(iris){
   return(rows)
 }
 
+# Brittni: This was almost perfect (-0.25). We wanted to just count the number of obs of a species, not the head. 
+# This would have been perfect:
+
+speciescount <- function(iris){
+  selectspecies = iris[iris$Species == species,] 
+  rows= nrow(selectspecies)
+  return(rows)
+}
 
 ###Return a dataframe for flowers with Sepal.Width greater than a value specified by the function user
 i = 3.1 #define desired sepal width
+# Brittni: This does work, but you want to define the value as an argument in the function. (-0.1)
 sepalwidth <-function(iris){
   onlysepalwidth = iris[iris$Sepal.Width > i ,]
   sepaldata = data.frame(onlysepalwidth)
   return(sepaldata)
   }
-sepaldata
+sepaldata # Brittni: To call the function, you want to use sepalwidth(iris) (-0.1)
+
 
 
 ###Write the data for a given species to a comma-delimited file with the given species name as the file name. 
 ######Hint: look at paste() to add the .csv extension to your file in the function.
-species = "setosa" #define desired species
+species = "setosa" #define desired species 
+# Brittni: Need to define the value as an argument (-0.1)
 speciescount <- function(iris){
   selectspecies = iris[iris$Species == species,] 
-  newfile = write(selectspecies, file = "species", sep = ",")
+  newfile = write(selectspecies, file = "species", sep = ",") # Brittni: This doesn't quite work. We need write.csv, and you need to make the file name with the extension using paste(). (-0.25)
   return(newfile)
 }
-
-
